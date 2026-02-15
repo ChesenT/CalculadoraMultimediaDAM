@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        tv = findViewById(R.id.texView);
-        tvOperacion = findViewById(R.id.tvOperacion);
+        tv = findViewById(R.id.textResultado);
+        tvOperacion = findViewById(R.id.textHistorial);
 
         buttonUno = findViewById(R.id.buttonUno);
         buttonDos = findViewById(R.id.buttonDos);
@@ -120,21 +120,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (v == buttonPunto) {
             String actual = tv.getText().toString();
 
-            // Si acabo de mostrar resultado o tengo que empezar nuevo número, empiezo con 0.
-            if (resultadoMostrado || empezarNuevoNumero) {
-                tv.setText("0.");
+            if (resultadoMostrado) {
+                tvOperacion.setText("");
+                tv.setText("0,");
                 resultadoMostrado = false;
                 empezarNuevoNumero = false;
-            } else if (actual.equals("0")) {
-                tv.setText("0.");
-            } else if (!actual.contains(".")) {
-                tv.setText(actual + ".");
+                return;
+            }
+
+            if (empezarNuevoNumero) {
+                tv.setText("0,");
+                empezarNuevoNumero = false;
+                return;
+            }
+
+            if (!actual.contains(",")) {
+                tv.setText(actual + ",");
             }
         }
 
         // Operadores (incluye ^ y %)
         else if (v == buttonSuma || v == buttonResta || v == buttonMultiplica || v == buttonDivide
-                || v == buttonPotencia || v == buttonModulo) {
+                || v == buttonPotencia) {
 
             String nuevoOperador = "";
             if (v == buttonSuma) nuevoOperador = "+";
@@ -142,19 +149,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else if (v == buttonMultiplica) nuevoOperador = "*";
             else if (v == buttonDivide) nuevoOperador = "/";
             else if (v == buttonPotencia) nuevoOperador = "^";
-            else if (v == buttonModulo) nuevoOperador = "%";
 
             // Si estoy esperando segundo número y aún no he escrito nada, cambiar operador (Windows)
             if (esperandoSegundoNumero && empezarNuevoNumero) {
                 operador = nuevoOperador;
-                tvOperacion.setText(formatear(num1) + operador);
+                tvOperacion.setText(formatear(num1) + " " + " " + operador);
                 return;
             }
 
             // Guardar/actualizar num1 con lo que hay en pantalla
             String textoPantalla = tv.getText().toString();
             if (!textoPantalla.isEmpty()) {
-                double current = Double.parseDouble(textoPantalla);
+                double current = toDouble(textoPantalla);
+
 
                 if (!operador.isEmpty() && esperandoSegundoNumero && !empezarNuevoNumero) {
                     // Encadenar: 2 + 3 + 4 ...
@@ -170,11 +177,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             empezarNuevoNumero = true;   // el siguiente número sustituye
             resultadoMostrado = false;
 
-            tvOperacion.setText(formatear(num1) + operador);
+            tvOperacion.setText(formatear(num1) + " " + " " +operador);
 
             // IMPORTANTE: NO ponemos 0 aquí -> se queda mostrando el num1 (Windows)
             tv.setText(formatear(num1));
         }
+
+
+        // Botón % estilo Windows real
+// Botón % estilo Windows real
+        else if (v == buttonModulo) {
+
+            // Solo funciona si hay operador activo
+            if (!operador.isEmpty() && !tv.getText().toString().isEmpty()) {
+
+                double valorActual = toDouble(tv.getText().toString());
+                double porcentaje = 0;
+
+                if (operador.equals("+") || operador.equals("-")) {
+                    // B% de A
+                    porcentaje = num1 * valorActual / 100;
+                } else if (operador.equals("*") || operador.equals("/")) {
+                    // Para multiplicar o dividir solo convierte B en B/100
+                    porcentaje = valorActual / 100;
+                } else if (operador.equals("^")) {
+                    porcentaje = valorActual / 100;
+                }
+
+                // Mostrar el porcentaje en la pantalla (abajo)
+                tv.setText(formatear(porcentaje));
+
+                // ✅ IMPORTANTE: actualizar historial arriba con el porcentaje calculado
+                // Ej: "50+10" (o con espacios si tú quieres)
+                tvOperacion.setText(formatear(num1) + " " + operador + " " + formatear(porcentaje));
+
+                // ✅ Guardar num2 ya convertido para que "=" use 10 y no 20
+                num2 = porcentaje;
+
+                // Ahora num2 ya es el porcentaje transformado
+                empezarNuevoNumero = true;   // el siguiente número reemplaza (como Windows)
+                resultadoMostrado = false;
+            }
+        }
+
 
         // Igual
         else if (v == buttonIgual) {
@@ -189,12 +234,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (empezarNuevoNumero) {
                     num2 = num1;
                 } else {
-                    num2 = Double.parseDouble(texto);
+                    num2 = toDouble(texto);
+
                 }
 
                 double resultado = calcular(num1, num2, operador);
 
-                tvOperacion.setText(formatear(num1) + operador + formatear(num2) + "=");
+                tvOperacion.setText(formatear(num1) + " " + operador + " " + formatear(num2) + " =");
                 tv.setText(formatear(resultado));
 
                 lastNum2 = num2;
@@ -214,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else if (!lastOperador.isEmpty()) {
                 double resultado = calcular(num1, lastNum2, lastOperador);
 
-                tvOperacion.setText(formatear(num1) + lastOperador + formatear(lastNum2) + "=");
+                tvOperacion.setText(formatear(num1) + " " + lastOperador + " " + formatear(lastNum2) + " =");
                 tv.setText(formatear(resultado));
 
                 num1 = resultado;
@@ -267,16 +313,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // - si acabo de mostrar resultado, sustituye
     // - si acabo de pulsar operador (empezarNuevoNumero), sustituye
     private void escribirNumero(String n) {
+
         String actual = tv.getText().toString();
 
+        if (resultadoMostrado) {
+            tvOperacion.setText("");
+        }
+
         if (resultadoMostrado || empezarNuevoNumero || actual.equals("0")) {
-            tv.setText(n);
+            actual = n;
             resultadoMostrado = false;
             empezarNuevoNumero = false;
         } else {
-            tv.setText(actual + n);
+            actual = actual + n;
+        }
+
+        // Si tiene decimal
+        if (actual.contains(",")) {
+
+            String[] partes = actual.split(",");
+
+            // Parte entera limpia
+            String entero = partes[0].replace(".", "");
+            String decimal = partes.length > 1 ? partes[1] : "";
+
+            double numero = Double.parseDouble(entero); // aquí entero YA está limpio (sin puntos)
+
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setGroupingSeparator('.');
+            symbols.setDecimalSeparator(',');
+
+            DecimalFormat df = new DecimalFormat("#,##0", symbols);
+
+            String enteroFormateado = df.format(numero);
+
+            tv.setText(enteroFormateado + "," + decimal);
+
+        } else {
+
+            String limpio = actual.replace(".", "");
+            double numero = Double.parseDouble(limpio);
+
+            tv.setText(formatear(numero));
         }
     }
+
+    private double toDouble(String s) {
+        if (s == null || s.isEmpty()) return 0;
+
+        // Quita miles (.) y cambia decimal (,) por (.)
+        s = s.replace(".", "").replace(",", ".");
+        return Double.parseDouble(s);
+    }
+
 
     // Metodo auxiliar para calcular
     private double calcular(double a, double b, String op) {
@@ -286,15 +375,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case "*": return a * b;
             case "/": return b != 0 ? a / b : 0;
             case "^": return Math.pow(a, b);
-            case "%": return b != 0 ? a % b : 0;
             default: return 0;
         }
     }
 
     // Formato: máximo 2 decimales y separador "."
     private String formatear(double n) {
-        DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(Locale.US);
-        DecimalFormat df = new DecimalFormat("0.##", symbols);
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // miles
+        symbols.setDecimalSeparator(',');  // decimales
+
+        DecimalFormat df = new DecimalFormat("#,##0.##", symbols);
         return df.format(n);
     }
+
 }
