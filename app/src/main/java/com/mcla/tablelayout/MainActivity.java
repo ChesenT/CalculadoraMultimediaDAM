@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // IMPORTANTE: NO ponemos 0 aquí -> se queda mostrando el num1 (Windows)
             tv.setText(formatear(num1));
         }
-        
+
         else if (v == buttonModulo) {
 
             // Solo funciona si hay operador activo

@@ -20,7 +20,7 @@
     <string name="buttonPotencia">^</string>
     <string name="buttonModulo">%</string>
     <string name="buttonDel">DEL</string>
-    <string name="buttonPunto">.</string>
+    <string name="buttonPunto">,</string>
 
     <string name="textView">0</string>
 </resources>
