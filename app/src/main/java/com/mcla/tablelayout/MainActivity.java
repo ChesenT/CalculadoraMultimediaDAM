@@ -182,10 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // IMPORTANTE: NO ponemos 0 aquí -> se queda mostrando el num1 (Windows)
             tv.setText(formatear(num1));
         }
-
-
-        // Botón % estilo Windows real
-// Botón % estilo Windows real
+        
         else if (v == buttonModulo) {
 
             // Solo funciona si hay operador activo
@@ -209,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // ✅ IMPORTANTE: actualizar historial arriba con el porcentaje calculado
                 // Ej: "50+10" (o con espacios si tú quieres)
-                tvOperacion.setText(formatear(num1) + " " + operador + " " + formatear(porcentaje));
+                tvOperacion.setText(formatear(num1) + operador + formatear(porcentaje));
 
                 // ✅ Guardar num2 ya convertido para que "=" use 10 y no 20
                 num2 = porcentaje;
@@ -219,7 +216,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 resultadoMostrado = false;
             }
         }
-
 
         // Igual
         else if (v == buttonIgual) {

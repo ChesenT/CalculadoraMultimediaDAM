@@ -11,15 +11,12 @@
     <string name="buttonOcho">8</string>
     <string name="buttonNueve">9</string>
     <string name="buttonCero">0</string>
-
     <string name="buttonSuma">+</string>
     <string name="buttonResta">-</string>
     <string name="buttonMultiplica">*</string>
     <string name="buttonDivide">/</string>
     <string name="buttonIgual">=</string>
-    <string name="buttonLimpiar">Limpiar</string>
-
-    <!-- NUEVOS (requeridos por el PDF) -->
+    <string name="buttonLimpiar">C</string>
     <string name="buttonPotencia">^</string>
     <string name="buttonModulo">%</string>
     <string name="buttonDel">DEL</string>

@@ -8,38 +8,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fondoOperacion"
-        android:layout_width="446dp"
-        android:layout_height="381dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="#000000"
         app:layout_constraintBottom_toTopOf="@+id/fondoNumeros"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.825">
+
 
         <TextView
             android:id="@+id/textHistorial"
             android:layout_width="381dp"
             android:layout_height="53dp"
-            android:layout_marginTop="84dp"
-            android:text=""
+            android:layout_marginTop="92dp"
             android:gravity="bottom|end"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.565"
+            app:layout_constraintHorizontal_bias="0.659"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textResultado"
-            android:layout_width="394dp"
-            android:layout_height="137dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginBottom="77dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingBottom="8dp"
             android:autoSizeMaxTextSize="56sp"
             android:autoSizeMinTextSize="24sp"
             android:autoSizeStepGranularity="2sp"
@@ -81,26 +83,36 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tabelCalc2"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ButtonStyle">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#000000">
 
                 <Button
                     android:id="@+id/buttonSiete"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="7"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonSiete"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonOcho"
+                    android:text="@string/buttonOcho"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="8"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:textColor="#FFFFFF"
                     android:textSize="24sp" />
 
                 <Button
@@ -108,16 +120,23 @@
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="9"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonNueve"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonSuma"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="+"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonSuma"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
             </TableRow>
 
@@ -130,32 +149,47 @@
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="4"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonCuatro"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonCinco"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="5"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonCinco"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonSeis"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="6"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonSeis"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonResta"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="-"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonResta"
+                    android:textColor="#F4F4F4"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
             </TableRow>
 
@@ -168,32 +202,47 @@
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="1"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonUno"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonDos"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="2"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonDos"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonTres"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="3"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonTres"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonMultiplica"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="*"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonMultiplica"
+                    android:textColor="#F4F4F4"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
             </TableRow>
 
@@ -203,36 +252,57 @@
 
                 <Button
                     android:id="@+id/buttonPunto"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="."
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonPunto"
+                    android:textColor="#F4F4F4"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonCero"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="0"
+                    android:background="@drawable/bg_button"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonCero"
                     android:textSize="24sp"
-                    tools:ignore="ButtonStyle" />
+                    app:backgroundTint="@null" />
+
 
                 <Button
                     android:id="@+id/buttonPotencia"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="^"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonPotencia"
+                    android:textColor="#F4F4F4"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/buttonDivide"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="82dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="/"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonDivide"
+                    android:textColor="#F4F4F4"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
 
             </TableRow>
 
@@ -258,8 +328,18 @@
                     android:layout_width="84dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="C"
-                    android:textSize="24sp" />
+                    android:autoSizeMaxTextSize="24sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/buttonLimpiar"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
+
             </TableRow>
 
             <TableRow
@@ -271,8 +351,11 @@
                     android:layout_width="84dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="DEL"
-                    android:textSize="18sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonDel"
+                    android:textSize="20sp"
+                    app:backgroundTint="@null" />
             </TableRow>
 
             <TableRow
@@ -284,8 +367,11 @@
                     android:layout_width="84dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="%"
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_operadores"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonModulo"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
             </TableRow>
 
             <TableRow
@@ -294,11 +380,15 @@
 
                 <Button
                     android:id="@+id/buttonIgual"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="84dp"
                     android:layout_height="115dp"
                     android:layout_margin="2dp"
-                    android:text="="
-                    android:textSize="24sp" />
+                    android:background="@drawable/bg_button_igual"
+                    android:backgroundTint="@null"
+                    android:text="@string/buttonIgual"
+                    android:textSize="24sp"
+                    app:backgroundTint="@null" />
             </TableRow>
 
         </TableLayout>
